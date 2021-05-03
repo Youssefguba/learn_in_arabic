@@ -7,7 +7,7 @@ import 'package:learn_in_arabic/shared/model/youtube_model.dart';
 import '../playlist.dart';
 
 class PlaylistScreen extends StatefulWidget {
-  final List<Item> listOfCourses;
+  final List<PlaylistItem> listOfCourses;
   final title;
   const PlaylistScreen({Key key, this.listOfCourses,  this.title}) : super(key: key);
 

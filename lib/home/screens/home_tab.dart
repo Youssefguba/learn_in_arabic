@@ -37,6 +37,7 @@ class _HomeTabState extends State<HomeTab> {
         child: Container(
           color: Colors.white,
           height: _screenHeight,
+          width: _screenWidth,
           child: Column(
             children: [
               // Programming Content

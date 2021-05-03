@@ -6,7 +6,7 @@ abstract class BusinessContentState {}
 class BusinessContentInitial extends BusinessContentState {}
 
 class GetBusinessContentStateDone extends BusinessContentState {
-  final List<Item> listOfBusinessPlaylist;
+  final List<PlaylistItem> listOfBusinessPlaylist;
   GetBusinessContentStateDone(this.listOfBusinessPlaylist);
 }
 

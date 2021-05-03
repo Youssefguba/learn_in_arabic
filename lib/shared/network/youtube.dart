@@ -1,17 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:learn_in_arabic/shared/model/youtube_model.dart';
+import 'package:learn_in_arabic/shared/model/youtube_playlist_video_model.dart';
 
 class YoutubeRepository {
   final dio = Dio();
-  final String url = 'https://youtube.googleapis.com/youtube/v3/playlists';
+  final String playlistUrl = 'https://youtube.googleapis.com/youtube/v3/playlists';
   final String apiKey = 'AIzaSyAIUAVBvsSADB2B_8vh-CaNJOt7fuHQDgM';
   final String channelId = 'UCiit2m7skf-rTBNVJEnHWoQ';
 
+  final String playlistVideosUrl = 'https://youtube.googleapis.com/youtube/v3/playlistItems';
 
-  Future<Youtube> getYoutubeData() async {
+
+
+  Future<Youtube> getYoutubeChannelPlaylist() async {
     try {
-      final response = await dio.get(url,
+      final response = await dio.get(playlistUrl,
           queryParameters: {
             'part': 'snippet',
             "channelId": channelId,
@@ -21,15 +25,26 @@ class YoutubeRepository {
           });
 
       final data = Youtube.fromJson(response.data);
-      print('This is an 0 ${data.items[1].id}');
-      print('This is an 1 ${data.items[1].snippet.title}');
-      print('This is an 2 ${data.items[2].snippet.title}');
-      print('This is an 3 ${data.items[3].snippet.title}');
-      print('This is an 4 ${data.items[4].snippet.title}');
-      print('This is an 5 ${data.items[5].snippet.title}');
-      print('This is an 6 ${data.items[6].snippet.title}');
-      print('This is an 7 ${data.items[7].snippet.title}');
 
+      return data;
+    } catch (e) {
+      print('This is an e $e');
+      return null;
+    }
+  }
+
+  Future<YoutubePlaylistVideoModel> getPlaylistVideos(playlistId) async {
+    try {
+      final response = await dio.get(playlistVideosUrl,
+          queryParameters: {
+            'part': 'snippet',
+            "playlistId": 'PLR1jYXePZaNQUOHWtQn9aeyZ8F4flCn30',
+            'maxResults': 50,
+            'key': apiKey,
+            "Authorization": apiKey
+          });
+
+      final data = YoutubePlaylistVideoModel.fromJson(response.data);
       return data;
     } catch (e) {
       print('This is an e $e');

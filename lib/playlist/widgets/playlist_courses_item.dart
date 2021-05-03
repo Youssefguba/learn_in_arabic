@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class PlaylistCourseItem extends StatelessWidget {
   String title;
-  List<Item> listOfCourses;
+  List<PlaylistItem> listOfCourses;
   PlaylistCourseItem({this.title, this.listOfCourses});
 
   final youtubeUrl = 'https://www.youtube.com/playlist?list=';

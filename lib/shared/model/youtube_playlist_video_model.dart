@@ -1,47 +1,47 @@
 // To parse this JSON data, do
 //
-//     final youtube = youtubeFromJson(jsonString);
+//     final youtubePlaylistModel = youtubePlaylistModelFromJson(jsonString);
 
 import 'dart:convert';
 
-Youtube youtubeFromJson(String str) => Youtube.fromJson(json.decode(str));
+YoutubePlaylistVideoModel youtubePlaylistModelFromJson(String str) => YoutubePlaylistVideoModel.fromJson(json.decode(str));
 
-String youtubeToJson(Youtube data) => json.encode(data.toJson());
+String youtubePlaylistModelToJson(YoutubePlaylistVideoModel data) => json.encode(data.toJson());
 
-class Youtube {
-  Youtube({
+class YoutubePlaylistVideoModel {
+  YoutubePlaylistVideoModel({
     this.kind,
     this.etag,
     this.nextPageToken,
-    this.pageInfo,
     this.items,
+    this.pageInfo,
   });
 
   String kind;
   String etag;
   String nextPageToken;
+  List<VideoItem> items;
   PageInfo pageInfo;
-  List<PlaylistItem> items;
 
-  factory Youtube.fromJson(Map<String, dynamic> json) => Youtube(
+  factory YoutubePlaylistVideoModel.fromJson(Map<String, dynamic> json) => YoutubePlaylistVideoModel(
     kind: json["kind"],
     etag: json["etag"],
     nextPageToken: json["nextPageToken"],
+    items: List<VideoItem>.from(json["items"].map((x) => VideoItem.fromJson(x))),
     pageInfo: PageInfo.fromJson(json["pageInfo"]),
-    items: List<PlaylistItem>.from(json["items"].map((x) => PlaylistItem.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "kind": kind,
     "etag": etag,
     "nextPageToken": nextPageToken,
-    "pageInfo": pageInfo.toJson(),
     "items": List<dynamic>.from(items.map((x) => x.toJson())),
+    "pageInfo": pageInfo.toJson(),
   };
 }
 
-class PlaylistItem {
-  PlaylistItem({
+class VideoItem {
+  VideoItem({
     this.kind,
     this.etag,
     this.id,
@@ -53,7 +53,7 @@ class PlaylistItem {
   String id;
   Snippet snippet;
 
-  factory PlaylistItem.fromJson(Map<String, dynamic> json) => PlaylistItem(
+  factory VideoItem.fromJson(Map<String, dynamic> json) => VideoItem(
     kind: json["kind"],
     etag: json["etag"],
     id: json["id"],
@@ -76,7 +76,11 @@ class Snippet {
     this.description,
     this.thumbnails,
     this.channelTitle,
-    this.localized,
+    this.playlistId,
+    this.position,
+    this.resourceId,
+    this.videoOwnerChannelTitle,
+    this.videoOwnerChannelId,
   });
 
   DateTime publishedAt;
@@ -85,7 +89,11 @@ class Snippet {
   String description;
   Thumbnails thumbnails;
   String channelTitle;
-  Localized localized;
+  String playlistId;
+  int position;
+  ResourceId resourceId;
+  String videoOwnerChannelTitle;
+  String videoOwnerChannelId;
 
   factory Snippet.fromJson(Map<String, dynamic> json) => Snippet(
     publishedAt: DateTime.parse(json["publishedAt"]),
@@ -94,7 +102,11 @@ class Snippet {
     description: json["description"],
     thumbnails: Thumbnails.fromJson(json["thumbnails"]),
     channelTitle: json["channelTitle"],
-    localized: Localized.fromJson(json["localized"]),
+    playlistId: json["playlistId"],
+    position: json["position"],
+    resourceId: ResourceId.fromJson(json["resourceId"]),
+    videoOwnerChannelTitle: json["videoOwnerChannelTitle"],
+    videoOwnerChannelId: json["videoOwnerChannelId"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -104,27 +116,31 @@ class Snippet {
     "description": description,
     "thumbnails": thumbnails.toJson(),
     "channelTitle": channelTitle,
-    "localized": localized.toJson(),
+    "playlistId": playlistId,
+    "position": position,
+    "resourceId": resourceId.toJson(),
+    "videoOwnerChannelTitle": videoOwnerChannelTitle,
+    "videoOwnerChannelId": videoOwnerChannelId,
   };
 }
 
-class Localized {
-  Localized({
-    this.title,
-    this.description,
+class ResourceId {
+  ResourceId({
+    this.kind,
+    this.videoId,
   });
 
-  String title;
-  String description;
+  String kind;
+  String videoId;
 
-  factory Localized.fromJson(Map<String, dynamic> json) => Localized(
-    title: json["title"],
-    description: json["description"],
+  factory ResourceId.fromJson(Map<String, dynamic> json) => ResourceId(
+    kind: json["kind"],
+    videoId: json["videoId"],
   );
 
   Map<String, dynamic> toJson() => {
-    "title": title,
-    "description": description,
+    "kind": kind,
+    "videoId": videoId,
   };
 }
 

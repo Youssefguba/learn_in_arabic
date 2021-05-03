@@ -23,8 +23,8 @@ class ProgrammingContentBloc
     if (event is GetProgrammingPlaylistEvent) {
       yield LoadingToGetProgrammingContent();
 
-      List<Item> listOfProgrammingPlaylist = [];
-      final response = await _youtubeRepository.getYoutubeData();
+      List<PlaylistItem> listOfProgrammingPlaylist = [];
+      final response = await _youtubeRepository.getYoutubeChannelPlaylist();
       final playlists = response.items;
       for (var i = 0; i < playlists.length; i++) {
         if (i == 2 || i == 3 || i == 4 || i == 5)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learn_in_arabic/masaqat/blocs/masaqat/masaqat_bloc.dart';
 import 'package:learn_in_arabic/shared/network/youtube.dart';
 
 import 'home/home.dart';
@@ -11,12 +12,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     YoutubeRepository _youtubeRepository = YoutubeRepository();
 
+    _youtubeRepository.getPlaylistVideos('getPlaylistVideos');
     return MultiBlocProvider(
       providers: [
         /// Youtube Blocs
         BlocProvider(create: (_) => ProgrammingContentBloc(_youtubeRepository)),
         BlocProvider(create: (_) => MediaContentBloc(_youtubeRepository)),
         BlocProvider(create: (_) => BusinessContentBloc(_youtubeRepository)),
+
+        /// Masaqat Blocs
+        BlocProvider(create: (_) => MasaqatBloc(_youtubeRepository)),
       ],
       child: MaterialApp(
         title: 'Learn In Arabic',

@@ -22,8 +22,8 @@ class BusinessContentBloc extends Bloc<BusinessContentEvent, BusinessContentStat
     if(event is GetBusinessPlaylistEvent) {
       yield LoadingToGetBusinessContent();
 
-      List<Item> listOfBusinessPlaylist = [];
-      final response = await _youtubeRepository.getYoutubeData();
+      List<PlaylistItem> listOfBusinessPlaylist = [];
+      final response = await _youtubeRepository.getYoutubeChannelPlaylist();
       final playlists = response.items;
        for(var i = 0; i < playlists.length; i++){
          if(i == 0 || i == 1) {

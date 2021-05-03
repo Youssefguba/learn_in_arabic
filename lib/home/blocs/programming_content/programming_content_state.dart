@@ -6,7 +6,7 @@ abstract class ProgrammingContentState {}
 class ProgrammingContentInitial extends ProgrammingContentState {}
 
 class GetProgrammingContentStateDone extends ProgrammingContentState {
-  final List<Item> listOfProgrammingPlaylist;
+  final List<PlaylistItem> listOfProgrammingPlaylist;
   GetProgrammingContentStateDone(this.listOfProgrammingPlaylist);
 }
 

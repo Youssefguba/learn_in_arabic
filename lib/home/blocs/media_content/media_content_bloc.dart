@@ -21,8 +21,8 @@ class MediaContentBloc extends Bloc<MediaContentEvent, MediaContentState> {
   Stream<MediaContentState> mapEventToState(MediaContentEvent event) async* {
     if(event is GetMediaPlaylistEvent) {
       yield LoadingToGetMediaContent();
-      List<Item> listOfMediaPlaylist = [];
-      final response = await _youtubeRepository.getYoutubeData();
+      List<PlaylistItem> listOfMediaPlaylist = [];
+      final response = await _youtubeRepository.getYoutubeChannelPlaylist();
       final playlists = response.items;
        for(var i = 0; i < playlists.length; i++){
          if (i == 6 || i == 7) {

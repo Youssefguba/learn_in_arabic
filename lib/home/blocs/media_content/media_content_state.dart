@@ -6,7 +6,7 @@ abstract class MediaContentState {}
 class MediaContentInitial extends MediaContentState {}
 
 class GetMediaContentStateDone extends MediaContentState {
-  final List<Item> listOfMediaPlaylist;
+  final List<PlaylistItem> listOfMediaPlaylist;
   GetMediaContentStateDone(this.listOfMediaPlaylist);
 }
 
