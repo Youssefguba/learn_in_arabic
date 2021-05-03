@@ -1,0 +1,79 @@
+name: learn_in_arabic
+description: A new Flutter application.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # flutter packages
+  cupertino_icons: ^1.0.0
+  flutter_launcher_icons: ^0.8.1
+  meta: ^1.1.8
+  fluttertoast: ^3.1.0
+  intl: 0.16.1
+
+  # Network
+  http: ^0.12.1
+  dio: 3.0.10
+  url_launcher: 5.4.7
+
+  # Bloc
+  flutter_bloc: ^6.1.2
+  rxdart: ^0.25.0
+
+  # UI
+  shimmer: ^1.1.2
+  modal_bottom_sheet: ^1.0.0+1
+  flutter_screenutil: 4.0.4+1
+  flutter_spinkit: 4.1.2+1
+
+  # database
+  shared_preferences: ^0.5.12+4
+  cached_network_image: ^2.5.1
+
+flutter_icons:
+  android: "logo"
+  ios: true
+  image_path: "assets/logo.png"
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  fonts:
+    - family: BebasNeue
+      fonts:
+        - asset: fonts/BebasNeue_Regular.ttf
+
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter.ttf
+
+    - family: Monument
+      fonts:
+        - asset: fonts/Monument.otf
+
+    - family: Arb
+      fonts:
+        - asset: fonts/arb.otf
+        - asset: fonts/arb-bold.ttf
+        - asset: fonts/arb-regular.ttf
+
+  assets:
+    - assets/splash/
+    - assets/barbers/
+    - assets/icons/
+    - assets/images/
+    - assets/courses/
+    - assets/
+
+
+  uses-material-design: true
