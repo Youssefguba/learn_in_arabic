@@ -4,11 +4,13 @@ import 'package:learn_in_arabic/helpers/colors/colors.dart';
 import 'package:learn_in_arabic/playlist/playlist.dart';
 import 'package:learn_in_arabic/shared/model/youtube_model.dart';
 
-class CoursesSection extends StatelessWidget {
+import '../../shared/model/youtube_playlist_video_model.dart';
+
+class VideosSection extends StatelessWidget {
   String title;
-  List<PlaylistItem> listOfCourses;
+  List<VideoItem> listOfCourses;
   Function onTap;
-  CoursesSection({this.title, this.listOfCourses, this.onTap});
+  VideosSection({this.title, this.listOfCourses, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class CoursesSection extends StatelessWidget {
 
   Widget _contentOfSection(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    listOfCourses.shuffle();
+    // listOfCourses.shuffle();
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Container(

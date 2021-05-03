@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_in_arabic/home/home.dart';
 
 import 'helpers/helpers.dart';
+import 'masaqat/masaqat.dart';
 
 class MainPage extends StatefulWidget {
   final int pageIndex;
@@ -207,8 +208,7 @@ class _MainPageState extends State<MainPage> {
           physics: NeverScrollableScrollPhysics(),
           children: [
             HomeTab(),
-            HomeTab(),
-            HomeTab(),
+            MasaqatTab(),
             HomeTab(),
           ],
         ),

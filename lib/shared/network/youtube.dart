@@ -38,7 +38,7 @@ class YoutubeRepository {
       final response = await dio.get(playlistVideosUrl,
           queryParameters: {
             'part': 'snippet',
-            "playlistId": 'PLR1jYXePZaNQUOHWtQn9aeyZ8F4flCn30',
+            "playlistId": playlistId,
             'maxResults': 50,
             'key': apiKey,
             "Authorization": apiKey

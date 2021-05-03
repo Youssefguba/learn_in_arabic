@@ -7,7 +7,8 @@ class MasaqatInitial extends MasaqatState {}
 
 class GetListOfMasaqatStateDone extends MasaqatState {
   final List<PlaylistItem> listOfPlaylist;
-  GetListOfMasaqatStateDone(this.listOfPlaylist);
+  final List<YoutubePlaylistVideoModel> listOfVideos;
+  GetListOfMasaqatStateDone(this.listOfPlaylist, this.listOfVideos);
 }
 
 class LoadingToGetMasaqatContent extends MasaqatState {}
