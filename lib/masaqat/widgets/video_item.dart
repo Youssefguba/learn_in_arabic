@@ -6,9 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../shared/model/youtube_playlist_video_model.dart';
 
+// ignore: must_be_immutable
 class VideoPlaylistItem extends StatelessWidget {
   String title;
-  List<VideoItem> listOfCourses;
+  List<PlaylistVideoItem> listOfCourses;
   VideoPlaylistItem({this.title, this.listOfCourses});
 
   final youtubeUrl = 'https://www.youtube.com/watch?v=';
@@ -21,37 +22,6 @@ class VideoPlaylistItem extends StatelessWidget {
         children: [
           SizedBox(height: 5),
           _contentOfSection(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _titleOfSection() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            onTap: () {},
-            hoverColor: mGreyColor,
-            splashColor: mGreyColor,
-            focusColor: mGreyColor,
-            highlightColor: mGreyColor,
-            customBorder:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text('مشاهدة الجميع',
-                  style: TextStyle(
-                      color: mPrimaryBlackColor,
-                      fontSize: 14,
-                      fontFamily: "Arb")),
-            ),
-          ),
-          Text(title,
-              style: TextStyle(
-                  color: Colors.black, fontSize: 18, fontFamily: "Arb")),
         ],
       ),
     );

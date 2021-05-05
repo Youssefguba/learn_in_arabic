@@ -8,7 +8,7 @@ import '../../shared/model/youtube_playlist_video_model.dart';
 
 class VideosSection extends StatelessWidget {
   String title;
-  List<VideoItem> listOfCourses;
+  List<PlaylistVideoItem> listOfCourses;
   Function onTap;
   VideosSection({this.title, this.listOfCourses, this.onTap});
 

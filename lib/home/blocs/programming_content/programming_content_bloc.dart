@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:learn_in_arabic/shared/model/youtube_model.dart';
+import 'package:learn_in_arabic/shared/model/youtube_video.dart';
 import 'package:learn_in_arabic/shared/network/youtube.dart';
 import 'package:meta/meta.dart';
 
@@ -23,11 +24,11 @@ class ProgrammingContentBloc
     if (event is GetProgrammingPlaylistEvent) {
       yield LoadingToGetProgrammingContent();
 
-      List<PlaylistItem> listOfProgrammingPlaylist = [];
-      final response = await _youtubeRepository.getYoutubeChannelPlaylist();
+      List<VideoItem> listOfProgrammingPlaylist = [];
+      final response = await _youtubeRepository.getChannelVideos();
       final playlists = response.items;
       for (var i = 0; i < playlists.length; i++) {
-        if (i == 2 || i == 3 || i == 4 || i == 5)
+        // if (i == 2 || i == 3 || i == 4 || i == 5)
           listOfProgrammingPlaylist.add(playlists[i]);
       }
       yield GetProgrammingContentStateDone(listOfProgrammingPlaylist);

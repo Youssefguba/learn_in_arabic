@@ -1,47 +1,51 @@
 // To parse this JSON data, do
 //
-//     final youtubePlaylistModel = youtubePlaylistModelFromJson(jsonString);
+//     final youtubeVideo = youtubeVideoFromJson(jsonString);
 
 import 'dart:convert';
 
-YoutubePlaylistVideoModel youtubePlaylistModelFromJson(String str) => YoutubePlaylistVideoModel.fromJson(json.decode(str));
+YoutubeVideo youtubeVideoFromJson(String str) => YoutubeVideo.fromJson(json.decode(str));
 
-String youtubePlaylistModelToJson(YoutubePlaylistVideoModel data) => json.encode(data.toJson());
+String youtubeVideoToJson(YoutubeVideo data) => json.encode(data.toJson());
 
-class YoutubePlaylistVideoModel {
-  YoutubePlaylistVideoModel({
+class YoutubeVideo {
+  YoutubeVideo({
     this.kind,
     this.etag,
     this.nextPageToken,
-    this.items,
+    this.regionCode,
     this.pageInfo,
+    this.items,
   });
 
   String kind;
   String etag;
   String nextPageToken;
-  List<PlaylistVideoItem> items;
+  String regionCode;
   PageInfo pageInfo;
+  List<VideoItem> items;
 
-  factory YoutubePlaylistVideoModel.fromJson(Map<String, dynamic> json) => YoutubePlaylistVideoModel(
+  factory YoutubeVideo.fromJson(Map<String, dynamic> json) => YoutubeVideo(
     kind: json["kind"],
     etag: json["etag"],
     nextPageToken: json["nextPageToken"],
-    items: List<PlaylistVideoItem>.from(json["items"].map((x) => PlaylistVideoItem.fromJson(x))),
+    regionCode: json["regionCode"],
     pageInfo: PageInfo.fromJson(json["pageInfo"]),
+    items: List<VideoItem>.from(json["items"].map((x) => VideoItem.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "kind": kind,
     "etag": etag,
     "nextPageToken": nextPageToken,
-    "items": List<dynamic>.from(items.map((x) => x.toJson())),
+    "regionCode": regionCode,
     "pageInfo": pageInfo.toJson(),
+    "items": List<dynamic>.from(items.map((x) => x.toJson())),
   };
 }
 
-class PlaylistVideoItem {
-  PlaylistVideoItem({
+class VideoItem {
+  VideoItem({
     this.kind,
     this.etag,
     this.id,
@@ -50,21 +54,41 @@ class PlaylistVideoItem {
 
   String kind;
   String etag;
-  String id;
+  Id id;
   Snippet snippet;
 
-  factory PlaylistVideoItem.fromJson(Map<String, dynamic> json) => PlaylistVideoItem(
+  factory VideoItem.fromJson(Map<String, dynamic> json) => VideoItem(
     kind: json["kind"],
     etag: json["etag"],
-    id: json["id"],
+    id: Id.fromJson(json["id"]),
     snippet: Snippet.fromJson(json["snippet"]),
   );
 
   Map<String, dynamic> toJson() => {
     "kind": kind,
     "etag": etag,
-    "id": id,
+    "id": id.toJson(),
     "snippet": snippet.toJson(),
+  };
+}
+
+class Id {
+  Id({
+    this.kind,
+    this.videoId,
+  });
+
+  String kind;
+  String videoId;
+
+  factory Id.fromJson(Map<String, dynamic> json) => Id(
+    kind: json["kind"],
+    videoId: json["videoId"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "kind": kind,
+    "videoId": videoId,
   };
 }
 
@@ -76,11 +100,8 @@ class Snippet {
     this.description,
     this.thumbnails,
     this.channelTitle,
-    this.playlistId,
-    this.position,
-    this.resourceId,
-    this.videoOwnerChannelTitle,
-    this.videoOwnerChannelId,
+    this.liveBroadcastContent,
+    this.publishTime,
   });
 
   DateTime publishedAt;
@@ -89,11 +110,8 @@ class Snippet {
   String description;
   Thumbnails thumbnails;
   String channelTitle;
-  String playlistId;
-  int position;
-  ResourceId resourceId;
-  String videoOwnerChannelTitle;
-  String videoOwnerChannelId;
+  String liveBroadcastContent;
+  DateTime publishTime;
 
   factory Snippet.fromJson(Map<String, dynamic> json) => Snippet(
     publishedAt: DateTime.parse(json["publishedAt"]),
@@ -102,11 +120,8 @@ class Snippet {
     description: json["description"],
     thumbnails: Thumbnails.fromJson(json["thumbnails"]),
     channelTitle: json["channelTitle"],
-    playlistId: json["playlistId"],
-    position: json["position"],
-    resourceId: ResourceId.fromJson(json["resourceId"]),
-    videoOwnerChannelTitle: json["videoOwnerChannelTitle"],
-    videoOwnerChannelId: json["videoOwnerChannelId"],
+    liveBroadcastContent: json["liveBroadcastContent"],
+    publishTime: DateTime.parse(json["publishTime"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -116,31 +131,8 @@ class Snippet {
     "description": description,
     "thumbnails": thumbnails.toJson(),
     "channelTitle": channelTitle,
-    "playlistId": playlistId,
-    "position": position,
-    "resourceId": resourceId.toJson(),
-    "videoOwnerChannelTitle": videoOwnerChannelTitle,
-    "videoOwnerChannelId": videoOwnerChannelId,
-  };
-}
-
-class ResourceId {
-  ResourceId({
-    this.kind,
-    this.videoId,
-  });
-
-  String kind;
-  String videoId;
-
-  factory ResourceId.fromJson(Map<String, dynamic> json) => ResourceId(
-    kind: json["kind"],
-    videoId: json["videoId"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "kind": kind,
-    "videoId": videoId,
+    "liveBroadcastContent": liveBroadcastContent,
+    "publishTime": publishTime.toIso8601String(),
   };
 }
 
@@ -149,26 +141,22 @@ class Thumbnails {
     this.thumbnailsDefault,
     this.medium,
     this.high,
-    this.standard,
   });
 
   Default thumbnailsDefault;
   Default medium;
   Default high;
-  Default standard;
 
   factory Thumbnails.fromJson(Map<String, dynamic> json) => Thumbnails(
     thumbnailsDefault: Default.fromJson(json["default"]),
     medium: Default.fromJson(json["medium"]),
     high: Default.fromJson(json["high"]),
-    standard: Default.fromJson(json["standard"]),
   );
 
   Map<String, dynamic> toJson() => {
     "default": thumbnailsDefault.toJson(),
     "medium": medium.toJson(),
     "high": high.toJson(),
-    "standard": standard.toJson(),
   };
 }
 

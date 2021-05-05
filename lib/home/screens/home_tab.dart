@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_in_arabic/helpers/helpers.dart';
 import 'package:learn_in_arabic/home/widgets/courses_section.dart';
 import 'package:learn_in_arabic/playlist/playlist.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../home.dart';
 
@@ -29,6 +31,8 @@ class _HomeTabState extends State<HomeTab> {
     _screenWidth = MediaQuery.of(context).size.width;
   }
 
+  final youtubeUrl = 'https://www.youtube.com/watch?v=';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,82 +40,48 @@ class _HomeTabState extends State<HomeTab> {
         physics: BouncingScrollPhysics(),
         child: Container(
           color: Colors.white,
-          height: _screenHeight,
           width: _screenWidth,
-          child: Column(
-            children: [
-              // Programming Content
-              BlocBuilder<ProgrammingContentBloc, ProgrammingContentState>(
-                builder: (context, state) {
-                  if (state is LoadingToGetProgrammingContent) {
-                    return Flexible(flex: 1, child: ThumbnailsShimmerWidget());
-                  }
-                  if (state is GetProgrammingContentStateDone) {
-                    final snippet = state.listOfProgrammingPlaylist;
-                    final title = 'تعلموا البرمجة';
-                    return CoursesSection(
-                      title: title,
-                      listOfCourses: snippet,
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => PlaylistScreen(
-                                title: title, listOfCourses: snippet)));
-                      },
+          child: BlocBuilder<ProgrammingContentBloc, ProgrammingContentState>(
+            builder: (context, state) {
+              if (state is LoadingToGetProgrammingContent) {
+                return Flexible(flex: 1, child: ThumbnailsShimmerWidget());
+              }
+              if (state is GetProgrammingContentStateDone) {
+                final listOfCourses = state.listOfVideos;
+                listOfCourses.shuffle();
+                return ListView.builder(
+                  itemCount: listOfCourses.length,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () async => _launchURL(listOfCourses[index].id.videoId),
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CachedNetworkImage(
+                            imageUrl: listOfCourses[index].snippet.thumbnails.medium.url,
+                            height: 210,
+                            width: _screenWidth,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
                     );
-                  }
-                  return Container();
-                },
-              ),
-
-              // Business Content
-              BlocBuilder<BusinessContentBloc, BusinessContentState>(
-                builder: (context, state) {
-                  if (state is LoadingToGetBusinessContent) {
-                    return Flexible(flex: 1, child: ThumbnailsShimmerWidget());
-                  }
-                  if (state is GetBusinessContentStateDone) {
-                    final item = state.listOfBusinessPlaylist;
-                    final title = 'ريادة الأعمال';
-                    return CoursesSection(
-                      title: title,
-                      listOfCourses: item,
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => PlaylistScreen(
-                                title: title, listOfCourses: item)));
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-
-              // Media Content
-              BlocBuilder<MediaContentBloc, MediaContentState>(
-                builder: (context, state) {
-                  if (state is LoadingToGetMediaContent) {
-                    return Flexible(flex: 1, child: ThumbnailsShimmerWidget());
-                  }
-                  if (state is GetMediaContentStateDone) {
-                    final snippet = state.listOfMediaPlaylist;
-                    final title = 'التصوير & صناعة الفيديو';
-                    return CoursesSection(
-                      title: title,
-                      listOfCourses: snippet,
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => PlaylistScreen(
-                                title: title, listOfCourses: snippet)));
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-            ],
+                  },
+                );
+              }
+              return Container();
+            },
           ),
         ),
       ),
     );
   }
+
+  void _launchURL(url) async => await canLaunch(youtubeUrl + url)
+      ? await launch(youtubeUrl + url)
+      : throw 'Could not launch ${youtubeUrl + url}';
 }

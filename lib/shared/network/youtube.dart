@@ -2,15 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:learn_in_arabic/shared/model/youtube_model.dart';
 import 'package:learn_in_arabic/shared/model/youtube_playlist_video_model.dart';
+import 'package:learn_in_arabic/shared/model/youtube_video.dart';
 
 class YoutubeRepository {
   final dio = Dio();
-  final String playlistUrl = 'https://youtube.googleapis.com/youtube/v3/playlists';
-  final String apiKey = 'AIzaSyAIUAVBvsSADB2B_8vh-CaNJOt7fuHQDgM';
   final String channelId = 'UCiit2m7skf-rTBNVJEnHWoQ';
-
+  final String apiKey = 'AIzaSyAIUAVBvsSADB2B_8vh-CaNJOt7fuHQDgM';
+  final String playlistUrl = 'https://youtube.googleapis.com/youtube/v3/playlists';
+  final String channelVideosUrl = 'https://youtube.googleapis.com/youtube/v3/search';
   final String playlistVideosUrl = 'https://youtube.googleapis.com/youtube/v3/playlistItems';
-
 
 
   Future<Youtube> getYoutubeChannelPlaylist() async {
@@ -51,4 +51,26 @@ class YoutubeRepository {
       return null;
     }
   }
+
+  Future<YoutubeVideo> getChannelVideos() async {
+    try {
+      final response = await dio.get(channelVideosUrl,
+          queryParameters: {
+            'part': 'snippet, id',
+            'maxResults': 118,
+            'channelId': channelId,
+            'key': apiKey,
+            "Authorization": apiKey,
+            'order': 'viewCount',
+          });
+
+      final data = YoutubeVideo.fromJson(response.data);
+      return data;
+    } catch (e) {
+      print('This is an e $e');
+      return null;
+    }
+  }
+
+
 }

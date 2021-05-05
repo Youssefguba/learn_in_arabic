@@ -6,8 +6,8 @@ abstract class ProgrammingContentState {}
 class ProgrammingContentInitial extends ProgrammingContentState {}
 
 class GetProgrammingContentStateDone extends ProgrammingContentState {
-  final List<PlaylistItem> listOfProgrammingPlaylist;
-  GetProgrammingContentStateDone(this.listOfProgrammingPlaylist);
+  final List<VideoItem> listOfVideos;
+  GetProgrammingContentStateDone(this.listOfVideos);
 }
 
 class LoadingToGetProgrammingContent extends ProgrammingContentState {}

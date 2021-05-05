@@ -10,7 +10,7 @@ import '../../shared/model/youtube_playlist_video_model.dart';
 import '../blocs/masaqat/masaqat_bloc.dart';
 
 class MasaqatVideosScreen extends StatefulWidget {
-  final List<VideoItem> listOfVideos;
+  final List<PlaylistVideoItem> listOfVideos;
   final title;
   const MasaqatVideosScreen({Key key, this.listOfVideos,  this.title}) : super(key: key);
 

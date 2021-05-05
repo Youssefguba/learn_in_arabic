@@ -18,8 +18,8 @@ class CoursesSection extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
-            SizedBox(height: 5),
-            _titleOfSection(context),
+            // SizedBox(height: 5),
+            // _titleOfSection(context),
             SizedBox(height: 8),
             _contentOfSection(context),
           ],
@@ -60,20 +60,22 @@ class CoursesSection extends StatelessWidget {
 
   Widget _contentOfSection(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     listOfCourses.shuffle();
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
-        height: height * 0.18,
+        height: double.infinity,
+        width: double.infinity,
         child: ListView.builder(
           itemCount: listOfCourses.length,
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
           physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             return Container(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -81,20 +83,20 @@ class CoursesSection extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                         child: CachedNetworkImage(
                           imageUrl: listOfCourses[index].snippet.thumbnails.medium.url,
-                          height: 100,
-                          width: 180,
+                          height: 150,
+                          width: width,
                           fit: BoxFit.fitHeight,
                         )),
                   ),
-                  Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(
-                        listOfCourses[index].snippet.title,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Arb',
-                            fontWeight: FontWeight.w400),
-                      ))
+                  // Container(
+                  //     margin: EdgeInsets.symmetric(horizontal: 8),
+                  //     child: Text(
+                  //       listOfCourses[index].snippet.title,
+                  //       style: TextStyle(
+                  //           color: Colors.black,
+                  //           fontFamily: 'Arb',
+                  //           fontWeight: FontWeight.w400),
+                  //     ))
                 ],
               ),
             );

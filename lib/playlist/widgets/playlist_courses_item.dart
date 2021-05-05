@@ -4,6 +4,7 @@ import 'package:learn_in_arabic/helpers/colors/colors.dart';
 import 'package:learn_in_arabic/shared/model/youtube_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class PlaylistCourseItem extends StatelessWidget {
   String title;
   List<PlaylistItem> listOfCourses;
