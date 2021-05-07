@@ -44,11 +44,12 @@ class _HomeTabState extends State<HomeTab> {
           child: BlocBuilder<ProgrammingContentBloc, ProgrammingContentState>(
             builder: (context, state) {
               if (state is LoadingToGetProgrammingContent) {
-                return Flexible(flex: 1, child: ThumbnailsShimmerWidget());
+                return  HomeVideosShimmerWidget();
               }
               if (state is GetProgrammingContentStateDone) {
                 final listOfCourses = state.listOfVideos;
                 listOfCourses.shuffle();
+
                 return ListView.builder(
                   itemCount: listOfCourses.length,
                   scrollDirection: Axis.vertical,
@@ -62,10 +63,10 @@ class _HomeTabState extends State<HomeTab> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: CachedNetworkImage(
-                            imageUrl: listOfCourses[index].snippet.thumbnails.medium.url,
+                            imageUrl: listOfCourses[index].snippet.thumbnails.high.url,
                             height: 210,
                             width: _screenWidth,
-                            fit: BoxFit.fitHeight,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

@@ -43,7 +43,7 @@ flutter_icons:
   image_path: "assets/logo.png"
 
 
-dev_dependencies:
+dev_dependencies:z
   flutter_test:
     sdk: flutter
 
