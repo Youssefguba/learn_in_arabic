@@ -4,8 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:formz/formz.dart';
-import 'package:learn_in_arabic/authentication/models/models.dart';
-import 'package:learn_in_arabic/authentication/models/phone_number.dart';
 import 'package:meta/meta.dart';
 import 'package:firestore_repository/firestore_repository.dart';
 
@@ -62,11 +60,6 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       UserCredential _signedUser =
           await _authenticationRepository.logInWithGoogle();
-      print('this is a _signed user (1) ${_signedUser.user.email}');
-      print('this is a _signed user (2) ${_signedUser.credential.token}');
-      print('this is a _signed user (2) ${_signedUser.credential.providerId}');
-      print('this is a _signed user (2) ${_signedUser.user.refreshToken}');
-      print('this is a _signed user (3) ${_signedUser.additionalUserInfo.username}');
       _userRepository.addUserToFirestore(UserModel(
         userId: _signedUser.user.uid,
         userEmail: _signedUser.user.email,

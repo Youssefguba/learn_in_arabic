@@ -64,7 +64,6 @@ class _AppViewState extends State<AppView> {
         /// Auth Blocs
         BlocProvider(create: (_) => AuthenticationBloc(authenticationRepository: widget.authenticationRepository)),
         BlocProvider(create: (_) => LoginCubit(widget.authenticationRepository, _userRepository)),
-        BlocProvider(create: (_) => SignUpCubit(widget.authenticationRepository)),
 
 
       ],
