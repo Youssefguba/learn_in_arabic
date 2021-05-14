@@ -46,22 +46,16 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
         physics: BouncingScrollPhysics(),
         child: Container(
           color: Colors.white,
-          child: Column(
-            children: [
-              // Programming Content
-              BlocBuilder<ProgrammingContentBloc, ProgrammingContentState>(
-                builder: (context, state) {
-                  if(state is LoadingToGetProgrammingContent) {
-                    return Flexible(flex:1, child: ThumbnailsShimmerWidget());
-                  }
-                  if(state is GetProgrammingContentStateDone){
-                    return PlaylistCourseItem(title: 'تعلموا البرمجة', listOfCourses: widget.listOfCourses);
-                  }
-                  return Container();
-                },
-              ),
-
-            ],
+          child: BlocBuilder<ProgrammingContentBloc, ProgrammingContentState>(
+            builder: (context, state) {
+              if(state is LoadingToGetProgrammingContent) {
+                return Flexible(flex:1, child: ThumbnailsShimmerWidget());
+              }
+              if(state is GetProgrammingContentStateDone){
+                return PlaylistCourseItem(title: 'تعلموا البرمجة', listOfCourses: widget.listOfCourses);
+              }
+              return Container();
+            },
           ),
         ),
       ),

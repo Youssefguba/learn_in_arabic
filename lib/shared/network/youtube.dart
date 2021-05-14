@@ -7,7 +7,8 @@ import 'package:learn_in_arabic/shared/model/youtube_video.dart';
 class YoutubeRepository {
   final dio = Dio();
   final String channelId = 'UCiit2m7skf-rTBNVJEnHWoQ';
-  final String apiKey = 'AIzaSyAIUAVBvsSADB2B_8vh-CaNJOt7fuHQDgM';
+  // final String apiKey = 'AIzaSyAIUAVBvsSADB2B_8vh-CaNJOt7fuHQDgM';
+  final String apiKey = 'AIzaSyA0fGpzYeDEpIWwRjgJVts9Xa-wTEdxYWs';
   final String playlistUrl = 'https://youtube.googleapis.com/youtube/v3/playlists';
   final String channelVideosUrl = 'https://youtube.googleapis.com/youtube/v3/search';
   final String playlistVideosUrl = 'https://youtube.googleapis.com/youtube/v3/playlistItems';

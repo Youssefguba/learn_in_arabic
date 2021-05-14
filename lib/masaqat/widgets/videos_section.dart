@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_in_arabic/helpers/colors/colors.dart';
 import 'package:learn_in_arabic/playlist/playlist.dart';
 import 'package:learn_in_arabic/shared/model/youtube_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../shared/model/youtube_playlist_video_model.dart';
 
@@ -11,6 +12,8 @@ class VideosSection extends StatelessWidget {
   List<PlaylistVideoItem> listOfCourses;
   Function onTap;
   VideosSection({this.title, this.listOfCourses, this.onTap});
+
+  final youtubeUrl = 'https://www.youtube.com/watch?v=';
 
   @override
   Widget build(BuildContext context) {
@@ -72,32 +75,35 @@ class VideosSection extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) {
-            return Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CachedNetworkImage(
-                          imageUrl: listOfCourses[index].snippet.thumbnails.medium.url,
-                          height: 100,
-                          width: 180,
-                          fit: BoxFit.fitHeight,
-                        )),
-                  ),
-                  Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(
-                        listOfCourses[index].snippet.title,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Arb',
-                            fontWeight: FontWeight.w400),
-                      ))
-                ],
+            return GestureDetector(
+              onTap: () => _launchURL(listOfCourses[index].snippet.resourceId.videoId),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CachedNetworkImage(
+                            imageUrl: listOfCourses[index].snippet.thumbnails.high.url,
+                            height: 100,
+                            width: 180,
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Container(
+                        margin: EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(
+                          listOfCourses[index].snippet.title,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Arb',
+                              fontWeight: FontWeight.w400),
+                        ))
+                  ],
+                ),
               ),
             );
           },
@@ -105,4 +111,9 @@ class VideosSection extends StatelessWidget {
       ),
     );
   }
+
+  void _launchURL(url) async => await canLaunch(youtubeUrl + url)
+      ? await launch(youtubeUrl + url)
+      : throw 'Could not launch ${youtubeUrl + url}';
+
 }

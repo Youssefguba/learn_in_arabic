@@ -23,7 +23,7 @@ class ButtonLabel extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-              color: Colors.white, fontSize: 19.0, fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 19.0, fontWeight: FontWeight.bold, fontFamily: 'Arb'),
         ),
       ),
     );

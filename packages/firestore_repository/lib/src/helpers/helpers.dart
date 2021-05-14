@@ -1,0 +1,1 @@
+export 'firestore_collection_names.dart';

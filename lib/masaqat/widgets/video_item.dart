@@ -28,22 +28,22 @@ class VideoPlaylistItem extends StatelessWidget {
   }
 
   Widget _contentOfSection(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    // listOfCourses.shuffle();
+    // final height = MediaQuery.of(context).size.height;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
-        height: height,
+        // height: height,
         width: double.infinity,
         child: GridView.builder(
           itemCount: listOfCourses.length,
           scrollDirection: Axis.vertical,
+          shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 1,
             mainAxisSpacing: 1,
-            childAspectRatio: 0.90,
+            childAspectRatio: 1.2,
           ),
           itemBuilder: (context, index) {
             return InkWell(
@@ -65,7 +65,7 @@ class VideoPlaylistItem extends StatelessWidget {
                                 .thumbnails
                                 .medium
                                 .url,
-                            height: 180,
+                            height: 100,
                             width: double.infinity,
                             fit: BoxFit.fitWidth,
                           )),

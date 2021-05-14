@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1002543839935",
+    "project_id": "learn-in-arabic",
+    "storage_bucket": "learn-in-arabic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002543839935:android:633e16c257002da820640a",
+        "android_client_info": {
+          "package_name": "me.learn_in_arabic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002543839935-1i874s6ahlbc9o54gsqcnj0as4p3gskk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.learn_in_arabic",
+            "certificate_hash": "c2e3930dff61f6e4b6815272498a5b152eb4e9c2"
+          }
+        },
+        {
+          "client_id": "1002543839935-ak34uj4q1oe40rl74pv9nor5q0a4l07o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.learn_in_arabic",
+            "certificate_hash": "45ed4d9f90f98daa60535d7d23ef08d18b2d9773"
+          }
+        },
+        {
+          "client_id": "1002543839935-o1ojekjh6u8b2cc466mknj5tgen9g83m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0fGpzYeDEpIWwRjgJVts9Xa-wTEdxYWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002543839935-o1ojekjh6u8b2cc466mknj5tgen9g83m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -49,23 +49,17 @@ class _PlaylistScreenState extends State<MasaqatVideosScreen> {
         physics: BouncingScrollPhysics(),
         child: Container(
           color: Colors.white,
-          child: Column(
-            children: [
-              // Programming Content
-              BlocBuilder<MasaqatBloc, MasaqatState>(
-                builder: (context, state) {
-                  if(state is LoadingToGetMasaqatContent) {
-                    return Flexible(flex:1, child: ThumbnailsShimmerWidget());
-                  }
-                  if(state is GetListOfMasaqatStateDone){
-                    
-                    return VideoPlaylistItem(title: 'تعلموا البرمجة', listOfCourses: widget.listOfVideos);
-                  }
-                  return Container();
-                },
-              ),
+          child: BlocBuilder<MasaqatBloc, MasaqatState>(
+            builder: (context, state) {
+              if(state is LoadingToGetMasaqatContent) {
+                return Flexible(flex:1, child: ThumbnailsShimmerWidget());
+              }
+              if(state is GetListOfMasaqatStateDone){
 
-            ],
+                return VideoPlaylistItem(title: 'تعلموا البرمجة', listOfCourses: widget.listOfVideos);
+              }
+              return Container();
+            },
           ),
         ),
       ),

@@ -18,39 +18,8 @@ class PlaylistCourseItem extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          SizedBox(height: 5),
+          // SizedBox(height: 5),
           _contentOfSection(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _titleOfSection() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            onTap: () {},
-            hoverColor: mGreyColor,
-            splashColor: mGreyColor,
-            focusColor: mGreyColor,
-            highlightColor: mGreyColor,
-            customBorder:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text('مشاهدة الجميع',
-                  style: TextStyle(
-                      color: mPrimaryBlackColor,
-                      fontSize: 14,
-                      fontFamily: "Arb")),
-            ),
-          ),
-          Text(title,
-              style: TextStyle(
-                  color: Colors.black, fontSize: 18, fontFamily: "Arb")),
         ],
       ),
     );

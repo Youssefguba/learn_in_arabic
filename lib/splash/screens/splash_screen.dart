@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:learn_in_arabic/helpers/helpers.dart';
 import 'package:learn_in_arabic/main_screen.dart';
+import 'package:learn_in_arabic/on_boarding/on_boarding.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
         builder: (context) {
           //to move to next splash screen
-          return MainPage();
+          return OnBoardingPage();
         },
       ), (route) => false);
     });
