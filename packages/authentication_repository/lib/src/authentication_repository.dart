@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -73,14 +74,19 @@ class AuthenticationRepository {
     try {
 
       final googleUser = await _googleSignIn.signIn();
-      print('this is google user ${googleUser.email}');
       final googleAuth = await googleUser.authentication;
-      print('this is google auth (1) ${googleAuth.accessToken}');
-      print('this is google auth (2) ${googleAuth.idToken}');
+      // print('this is google auth (1) ${googleAuth.accessToken}');
+      // print('this is google auth (2) ${googleAuth.idToken}');
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
+      developer.log('this is a credential id token ${credential.idToken}');
+      developer.log('this is a credential access token ${credential.accessToken}');
+      developer.log('this is a credential secret ${credential.secret}');
+      developer.log('this is a credential tokeen ${credential.token}');
+
+
       return await _firebaseAuth.signInWithCredential(credential);
     } catch(e) {
       print('print($e)');

@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_in_arabic/masaqat/blocs/masaqat/masaqat_bloc.dart';
 import 'package:learn_in_arabic/shared/network/youtube.dart';
+import 'package:learn_in_arabic/wishlist/blocs/wishlist_bloc/wish_list_bloc.dart';
 
 import 'authentication/authentication.dart';
 import 'home/home.dart';
 import 'navigator/navigator.dart';
-import 'splash/splash.dart';
-
 
 
 class App extends StatelessWidget {
@@ -53,10 +52,11 @@ class _AppViewState extends State<AppView> {
 
     return MultiBlocProvider(
       providers: [
-        /// Youtube Blocs
-        BlocProvider(create: (_) => ProgrammingContentBloc(_youtubeRepository)),
-        BlocProvider(create: (_) => MediaContentBloc(_youtubeRepository)),
-        BlocProvider(create: (_) => BusinessContentBloc(_youtubeRepository)),
+        /// Home Bloc
+        BlocProvider(create: (_) => HomeContentBloc(_youtubeRepository)),
+
+        /// Wish List
+        BlocProvider(create: (_) => WishListBloc()),
 
         /// Masaqat Blocs
         BlocProvider(create: (_) => MasaqatBloc(_youtubeRepository)),
@@ -82,6 +82,7 @@ class _AppViewState extends State<AppView> {
             listener: (context, state) {
               switch (state.status) {
                 case AuthenticationStatus.authenticated:
+                  // NamedNavigatorImpl().push(Routes.SPLASH_SCREEN , clean: true);
                   NamedNavigatorImpl().push(Routes.HOME, clean: true);
                   break;
                 case AuthenticationStatus.unauthenticated:

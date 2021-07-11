@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_in_arabic/helpers/colors/colors.dart';
-import 'package:learn_in_arabic/playlist/playlist.dart';
 import 'package:learn_in_arabic/shared/model/youtube_model.dart';
 
 class CoursesSection extends StatelessWidget {

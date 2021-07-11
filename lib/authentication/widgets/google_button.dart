@@ -3,6 +3,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:formz/formz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_in_arabic/helpers/helpers.dart';
+import 'package:learn_in_arabic/navigator/named_navigator_impl.dart';
+import 'package:learn_in_arabic/navigator/navigator.dart';
 
 import '../authentication.dart';
 
@@ -15,11 +17,14 @@ class GoogleButton extends StatelessWidget {
         if(state.status == FormzStatus.submissionFailure) {
           Fluttertoast.showToast(msg: 'لا يمكنك التسجيل دخول الآن حاول مرة أخرى!');
         }
+        if(state.status == FormzStatus.submissionSuccess){
+          NamedNavigatorImpl().push(Routes.HOME, clean: true);
+        }
       },
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Container(
-          width: width * 0.80,
+          width: width * 0.8,
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),

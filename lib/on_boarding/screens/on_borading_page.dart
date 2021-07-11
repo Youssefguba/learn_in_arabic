@@ -35,7 +35,22 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _animateSlider());
   }
+
+  void _animateSlider() {
+    Future.delayed(Duration(seconds: 2)).then((_) {
+      int nextPage = _boardingController.page.round() + 1;
+
+      if (nextPage == _splashData.length) {
+        nextPage = 0;
+      }
+
+      _boardingController
+          .animateToPage(nextPage, duration: Duration(seconds: 1), curve: Curves.easeIn);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +58,23 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          title: Container(
+            child: Text(
+              "تعلموا بالعربية",
+              style: TextStyle(
+                  color: mPrimaryBlackColor, fontFamily: 'Arb', fontSize: 40, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
         body: SafeArea(
           child: Column(
             children: [
               Flexible(
-                flex: 9,
+                flex: 7,
                 child: PageView.builder(
                   physics: BouncingScrollPhysics(),
                   controller: _boardingController,
@@ -62,8 +89,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               Flexible(
                 flex: 3,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * 0.1),
+                  padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(

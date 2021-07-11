@@ -15,22 +15,23 @@ class SplashContent extends StatelessWidget {
     return Column(
       children: [
         //title
-        Flexible(
-          flex: 1,
-          fit: FlexFit.tight,
-          child: Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Text(
-                "تعلموا بالعربية",
-                style: TextStyle(
-                    color: mPrimaryBlackColor, fontFamily: 'Arb', fontSize: 35),
-              ),
-            ),
-        ),
+
+        // Flexible(
+        //   flex: 1,
+        //   fit: FlexFit.tight,
+        //   child: Container(
+        //       padding: EdgeInsets.only(top: 10),
+        //       child: Text(
+        //         "تعلموا بالعربية",
+        //         style: TextStyle(
+        //             color: mPrimaryBlackColor, fontFamily: 'Arb', fontSize: 35, fontWeight: FontWeight.bold),
+        //       ),
+        //     ),
+        // ),
 
         //image
         Flexible(
-          flex: 3,
+          flex: 4,
           fit: FlexFit.tight,
           child: SvgPicture.asset(
             image,

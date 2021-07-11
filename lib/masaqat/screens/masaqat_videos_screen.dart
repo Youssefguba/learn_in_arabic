@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_in_arabic/masaqat/widgets/video_item.dart';
 
 import '../../helpers/helpers.dart';
-import '../../playlist/playlist.dart';
 import '../../shared/model/youtube_model.dart';
 import '../../shared/model/youtube_playlist_video_model.dart';
 import '../blocs/masaqat/masaqat_bloc.dart';
@@ -36,6 +35,7 @@ class _PlaylistScreenState extends State<MasaqatVideosScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: mSecondaryColor,

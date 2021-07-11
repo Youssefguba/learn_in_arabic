@@ -112,7 +112,7 @@ class UserRepository extends UserRepositoryBase {
   Future<List<AddressModel>> fetchListOfUserAddresses(userId) async {
     List<AddressModel> userAddressesList = [];
     try {
-      // get data from firestore.
+      // get data from  .
       DocumentSnapshot _userData = await _usersCollection.doc(userId).get();
 
       // mapping data

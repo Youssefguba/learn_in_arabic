@@ -1,6 +1,7 @@
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:learn_in_arabic/home/home.dart';
+import 'package:learn_in_arabic/wishlist/wishlist.dart';
 
 import 'helpers/helpers.dart';
 import 'masaqat/masaqat.dart';
@@ -209,7 +210,7 @@ class _MainPageState extends State<MainPage> {
           children: [
             HomeTab(),
             MasaqatTab(),
-            HomeTab(),
+            WishListTab(),
           ],
         ),
       ),

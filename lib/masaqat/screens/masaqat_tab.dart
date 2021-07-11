@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_in_arabic/helpers/helpers.dart';
-import 'package:learn_in_arabic/home/widgets/courses_section.dart';
 import 'package:learn_in_arabic/masaqat/blocs/masaqat/masaqat_bloc.dart';
 import 'package:learn_in_arabic/masaqat/screens/masaqat_videos_screen.dart';
-import 'package:learn_in_arabic/playlist/playlist.dart';
 
 import '../blocs/masaqat/masaqat_bloc.dart';
-import '../blocs/masaqat/masaqat_bloc.dart';
-import '../masaqat.dart';
 import '../widgets/videos_section.dart';
 
 class MasaqatTab extends StatefulWidget {
@@ -56,6 +52,7 @@ class _MasaqatTabState extends State<MasaqatTab> {
                   scrollDirection: Axis.vertical,
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
+                  reverse: true,
                   itemBuilder: (context, index) {
                     return VideosSection(
                       title: listOfPlaylist[index].snippet.title,

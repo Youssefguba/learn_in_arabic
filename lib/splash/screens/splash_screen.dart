@@ -11,8 +11,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool start = false;
   @override
   void initState() {
+    super.initState();
     final duration = Duration(seconds: 4);
     Future.delayed(duration, () {
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
@@ -22,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
         },
       ), (route) => false);
     });
-    super.initState();
+
   }
 
   @override
@@ -36,21 +38,21 @@ class _SplashScreenState extends State<SplashScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Center(
-        child: Container(
-          height: height,
-          width: width * 0.5,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(child: Image.asset('assets/logo.png')),
-              SizedBox(height: 12),
-              SpinKitThreeBounce(size: 25, color: Colors.black),
-            ],
+          child: Container(
+            height: height,
+            width: width * 0.5,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(child: Image.asset('assets/logo.png')),
+                SizedBox(height: 12),
+                SpinKitThreeBounce(size: 25, color: Colors.white),
+              ],
+            ),
           ),
         ),
-      ),
     );
   }
 }

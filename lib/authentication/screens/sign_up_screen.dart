@@ -37,12 +37,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     'assets/images/undraw_login.svg',
                     height: _screenHeight * 0.25,
                   )),
+              SizedBox(height: 20),
               Flexible(
                   flex: 1,
                   fit: FlexFit.loose,
-                  child: Text(
-                    'سجل دخولك معنا في تعلموا بالعربية',
-                    style: TextStyle(fontFamily: 'Arb', fontSize: 30),
+                  child: Container(
+                    width: _screenWidth * 0.8,
+                    child: Text(
+                      'سجل دخولك معنا في تعلموا بالعربية',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontFamily: 'Arb', fontSize: 30),
+                    ),
                   ),
               ),
               SizedBox(height: 20),
