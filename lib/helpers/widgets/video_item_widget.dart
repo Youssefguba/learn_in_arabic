@@ -9,8 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 class VideoItemWidget extends StatefulWidget {
   final VideoItem video;
   final index;
-  bool isFavourite;
-  VideoItemWidget({Key key, this.video, this.index, this.isFavourite = false}) : super(key: key);
+  VideoItemWidget({Key key, this.video, this.index}) : super(key: key);
 
   @override
   _VideoItemWidgetState createState() => _VideoItemWidgetState();
@@ -18,8 +17,33 @@ class VideoItemWidget extends StatefulWidget {
 
 class _VideoItemWidgetState extends State<VideoItemWidget> {
   double _screenWidth, _screenHeight;
-  ScrollController _videosScrollController = ScrollController();
   final youtubeUrl = 'https://www.youtube.com/watch?v=';
+  List wishListVideos;
+  bool isFavourite = false;
+  WishListBloc _wishListBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _wishListBloc = context.read<WishListBloc>();
+    _wishListBloc.add(GetWishListItems());
+    _wishListBloc.listen((state) {
+      if (state is GetWishListItemStateDone) {
+        wishListVideos = state.wishlist;
+        if (mounted) {
+          if (wishListVideos.contains(widget.video)) {
+            setState(() {
+              isFavourite = true;
+            });
+          } else {
+            setState(() {
+              isFavourite = false;
+            });
+          }
+        }
+      }
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -50,17 +74,18 @@ class _VideoItemWidgetState extends State<VideoItemWidget> {
         ),
         InkWell(
           onTap: () {
-            widget.isFavourite
-                ? context
-                    .read<WishListBloc>()
-                    .add(RemoveItemFromWishListEvent(widget.index))
-                : context
-                    .read<WishListBloc>()
-                    .add(AddItemToWishListEvent(widget.video));
-
+            print('Iam here inside click of favourites!!!!');
             setState(() {
-              widget.isFavourite = !widget.isFavourite;
+              isFavourite
+                  ? context
+                      .read<WishListBloc>()
+                      .add(RemoveItemFromWishListEvent(widget.video))
+                  : context
+                      .read<WishListBloc>()
+                      .add(AddItemToWishListEvent(widget.video));
             });
+
+            setState(() => isFavourite = !isFavourite);
           },
           child: Container(
             alignment: Alignment.bottomLeft,
@@ -75,7 +100,7 @@ class _VideoItemWidgetState extends State<VideoItemWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    widget.isFavourite
+                    isFavourite
                         ? Icon(Icons.favorite_rounded, color: Colors.white)
                         : Icon(Icons.favorite_border_rounded,
                             color: Colors.white),

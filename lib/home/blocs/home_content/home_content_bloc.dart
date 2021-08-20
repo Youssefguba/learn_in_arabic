@@ -25,9 +25,9 @@ class HomeContentBloc
   @override
   Stream<HomeContentState> mapEventToState(HomeContentEvent event) async* {
     if (event is GetHomePlaylistEvent) {
-      yield LoadingToGetHomeContent();
 
       if(event.nextPageToken == null) {
+        yield LoadingToGetHomeContent();
         listOfProgrammingPlaylist.clear();
       }
       youtubeRes = await _youtubeRepository.getChannelVideos(event.nextPageToken);

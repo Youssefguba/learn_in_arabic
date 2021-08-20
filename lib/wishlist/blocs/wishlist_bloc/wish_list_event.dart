@@ -14,5 +14,4 @@ class RemoveItemFromWishListEvent extends WishListEvent {
 
 }
 
-class GetWishListItems extends WishListEvent {
-}
+class GetWishListItems extends WishListEvent {}

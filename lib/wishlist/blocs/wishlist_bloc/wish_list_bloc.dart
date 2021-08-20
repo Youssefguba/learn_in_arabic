@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
@@ -19,14 +20,17 @@ class WishListBloc extends Bloc<WishListEvent, WishListState> {
 
     if (event is AddItemToWishListEvent) {
       try {
-        List wishlist = json.decode(_prefs.get(PreferenceKeys.wishList));
-
-        if (wishlist == null) {
+        List wishlist;
+        var listOfWishItems = _prefs.get(PreferenceKeys.wishList);
+        if (listOfWishItems != null) {
+          wishlist =
+              json.decode(_prefs.get(PreferenceKeys.wishList)).toSet().toList();
+        } else {
           wishlist = [];
         }
         wishlist.add(event.videoItem);
-
-        _prefs.setString(PreferenceKeys.wishList, json.encode(wishlist));
+        _prefs.setString(
+            PreferenceKeys.wishList, json.encode(wishlist.toSet().toList()));
       } catch (e) {
         print('Error in AddItemToWishListEvent $e');
         yield FailedToAddItemToWishList();
@@ -35,14 +39,19 @@ class WishListBloc extends Bloc<WishListEvent, WishListState> {
 
     if (event is RemoveItemFromWishListEvent) {
       final wishlist = json.decode(_prefs.get(PreferenceKeys.wishList));
-      wishlist.removeAt(event.index);
+      wishlist.remove(event.index);
       _prefs.setString(PreferenceKeys.wishList, json.encode(wishlist));
     }
 
     if (event is GetWishListItems) {
       try {
-        final wishlist = json.decode(_prefs.get(PreferenceKeys.wishList));
-
+        List wishlist;
+        var listOfWishItems = _prefs.get(PreferenceKeys.wishList);
+        if (listOfWishItems != null) {
+          wishlist = json.decode(_prefs.get(PreferenceKeys.wishList)).toSet().toList();
+        } else {
+          wishlist = [];
+        }
         final videoItemList = List<VideoItem>.from(
           wishlist.map(
             (serviceModel) {
@@ -54,7 +63,7 @@ class WishListBloc extends Bloc<WishListEvent, WishListState> {
         if (wishlist == null || wishlist.isEmpty) {
           yield FailedToGetWishListItems();
         } else {
-          yield GetWishListItemStateDone(videoItemList);
+          yield GetWishListItemStateDone(videoItemList.toSet().toList());
         }
       } catch (e) {
         print('this is an error in GetWishListItems $e');

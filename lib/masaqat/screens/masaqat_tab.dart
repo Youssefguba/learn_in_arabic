@@ -12,7 +12,7 @@ class MasaqatTab extends StatefulWidget {
   _MasaqatTabState createState() => _MasaqatTabState();
 }
 
-class _MasaqatTabState extends State<MasaqatTab> {
+class _MasaqatTabState extends State<MasaqatTab> with AutomaticKeepAliveClientMixin {
   double _screenWidth, _screenHeight;
 
   @override
@@ -30,6 +30,7 @@ class _MasaqatTabState extends State<MasaqatTab> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SafeArea(
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -74,4 +75,7 @@ class _MasaqatTabState extends State<MasaqatTab> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

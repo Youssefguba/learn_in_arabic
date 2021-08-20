@@ -108,7 +108,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           margin: EdgeInsets.symmetric(horizontal: 16),
                           child: ButtonLabel(
                             onPressed: () {
-                              NamedNavigatorImpl().push(Routes.SIGN_UP);
+                              NamedNavigatorImpl().push(Routes.HOME, clean: true);
                             },
                             text: 'هيا نبدأ!',
                             color: mPrimaryBlackColor,

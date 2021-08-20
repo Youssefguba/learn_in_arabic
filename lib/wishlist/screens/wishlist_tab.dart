@@ -72,7 +72,7 @@ class _WishListTabState extends State<WishListTab> {
                     itemBuilder: (context, index) => VideoItemWidget(
                         video: listOfWishList[index],
                         index: index,
-                        isFavourite: true));
+                    ));
               }
               return Container();
             },
